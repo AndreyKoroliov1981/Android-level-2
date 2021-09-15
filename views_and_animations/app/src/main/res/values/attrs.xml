@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AnalogClock">
+        <attr name="ac_hour" format="integer"/>
+        <attr name="ac_minute" format="integer"/>
+        <attr name="ac_second" format="integer"/>
+        <attr name="ac_borderWidth" format="integer"/>
+        <attr name="ac_hourHandWidth" format="integer"/>
+        <attr name="ac_minuteHandWidth" format="integer"/>
+        <attr name="ac_secondHandWidth" format="integer"/>
+        <attr name="ac_BorderColor" format="color"/>
+        <attr name="aс_HourHandColor" format="color" />
+        <attr name="ac_MinuteHandColor" format="color" />
+        <attr name="ac_SecondHandColor" format="color" />
+    </declare-styleable>
+</resources>
