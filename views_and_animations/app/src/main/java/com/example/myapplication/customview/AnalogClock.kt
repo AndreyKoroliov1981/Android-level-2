@@ -8,6 +8,7 @@ import android.support.annotation.Px
 import android.util.AttributeSet
 import com.example.myapplication.R
 import com.example.myapplication.extentions.dpToPx
+import java.io.Serializable
 import kotlin.concurrent.fixedRateTimer
 
 class AnalogClock @JvmOverloads constructor(
@@ -15,6 +16,9 @@ class AnalogClock @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : android.support.v7.widget.AppCompatImageView(context, attrs, defStyleAttr) {
+
+    class TimeState(val time:Long,val isPlayed:Boolean):Serializable {
+    }
 
     companion object {
         private const val DEFAULT_BORDER_WIDTH = 2
@@ -75,6 +79,11 @@ class AnalogClock @JvmOverloads constructor(
     fun stop() {
         isPlayed = false
         timer.cancel()
+        second = (myCurrentTime % 60).toInt()
+        minute = (myCurrentTime / 60 % 60).toInt()
+        hour = (myCurrentTime / 60 / 60 % 12).toInt()
+        prepareBitmaps()
+        invalidate()
     }
 
     fun reset() {

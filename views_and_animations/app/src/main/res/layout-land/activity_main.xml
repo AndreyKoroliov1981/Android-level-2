@@ -14,30 +14,30 @@
             android:background="@color/purple_200"
             app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/currenttime" app:layout_constraintHorizontal_bias="0.497"/>
+            app:layout_constraintBottom_toTopOf="@+id/currenttime" app:layout_constraintHorizontal_bias="0.101"
+            app:layout_constraintVertical_bias="0.0"/>
     <TextView
             android:id="@+id/currenttime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/myTimer" app:layout_constraintHorizontal_bias="0.501"/>
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toEndOf="@+id/myTimer"
+            android:layout_marginTop="92dp" android:layout_marginStart="224dp"/>
     <Button
             android:text="Start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/buttonStartStop"
             app:layout_constraintTop_toBottomOf="@+id/currenttime"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/buttonReset" app:layout_constraintHorizontal_bias="0.991"
-            app:layout_constraintVertical_bias="0.506"/>
+            app:layout_constraintEnd_toStartOf="@+id/buttonReset" app:layout_constraintHorizontal_bias="0.82"
+            app:layout_constraintVertical_bias="0.4"/>
     <Button
             android:text="Reset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/buttonReset"
             app:layout_constraintTop_toBottomOf="@+id/currenttime"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="116dp" app:layout_constraintVertical_bias="0.506"/>
+            android:layout_marginEnd="104dp" app:layout_constraintVertical_bias="0.4"/>
 
 </android.support.constraint.ConstraintLayout>
