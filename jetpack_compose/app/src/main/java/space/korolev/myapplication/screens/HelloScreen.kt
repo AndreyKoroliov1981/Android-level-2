@@ -17,9 +17,7 @@ import androidx.compose.ui.res.painterResource
 
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.navigate
 import space.korolev.myapplication.R
-
 
 
 @Composable
@@ -37,9 +35,9 @@ fun HelloScreen(navController: NavController) {
             modifier = Modifier
                 .fillMaxSize()
                 .clickable(onClick = {
-                    Toast
+                    /*Toast
                         .makeText(context, "Pressed Image", Toast.LENGTH_SHORT)
-                        .show()
+                        .show()*/
                     navController.navigate("listCharacters")
                 }
                 ))

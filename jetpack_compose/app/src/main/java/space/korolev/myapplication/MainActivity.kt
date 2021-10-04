@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun ComposeNavigation() {
 
-    val navController = rememberNavController() //здесь происходит сброс приложения
+    val navController = rememberNavController()
     NavHost(
         navController = navController,
         startDestination = "hello"
