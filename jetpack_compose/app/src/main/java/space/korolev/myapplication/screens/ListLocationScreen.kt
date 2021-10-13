@@ -2,13 +2,12 @@ package space.korolev.myapplication.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Button
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -20,36 +19,35 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import kotlinx.coroutines.flow.Flow
-import space.korolev.myapplication.CharacterRickAndMorty
-import space.korolev.myapplication.list.CharacterDataSource
-import space.korolev.myapplication.list.GlideImageWithPreview
-import space.korolev.myapplication.list.ListPagingSource
+import space.korolev.myapplication.RickMortyLocation
+import space.korolev.myapplication.list.ListLocationDataSource
+import space.korolev.myapplication.list.ListLocationPagingSource
 
-class MainViewModel(
-    dataRepository: CharacterDataSource
+class MainViewModelLocation(
+    dataRepository: ListLocationDataSource
 ) : ViewModel() {
 
-   val pageData: Flow<PagingData<CharacterRickAndMorty>> = Pager(PagingConfig(pageSize = 10)) {
-        ListPagingSource(dataRepository)
+    val pageData: Flow<PagingData<RickMortyLocation>> = Pager(PagingConfig(pageSize = 10)) {
+        ListLocationPagingSource(dataRepository)
     }.flow
 }
 
 @Composable
-fun ListCharactersScreen() {
+fun ListLocationsScreen() {
 
     Scaffold {
-        ListView()
+        ListViewLocations()
     }
 }
 
 @Composable
-fun ListView() {
-    val items: LazyPagingItems<CharacterRickAndMorty> = MainViewModel(CharacterDataSource()).pageData.collectAsLazyPagingItems()
+fun ListViewLocations() {
+    val items: LazyPagingItems<RickMortyLocation> = MainViewModelLocation(ListLocationDataSource()).pageData.collectAsLazyPagingItems()
 
 
     LazyColumn {
         items(items) {
-            it?.let { CommentView(comment = it) } ?: Text(text = "Ooops")
+            it?.let { CommentView2(comment = it) } ?: Text(text = "Ooops")
         }
 
         items.apply {
@@ -99,13 +97,12 @@ fun ListView() {
 }
 
 @Composable
-fun CommentView(comment: CharacterRickAndMorty) {
+fun CommentView2(comment: RickMortyLocation) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.padding(6.dp)
     )
     {
-        GlideImageWithPreview(data = comment.image, Modifier.size(120.dp))
 
         Column(modifier = Modifier.padding(start = 6.dp)) {
             Text(
@@ -115,11 +112,18 @@ fun CommentView(comment: CharacterRickAndMorty) {
                 fontSize = 25.sp,
             )
             Text(
-                text = comment.status,
+                text = "id ${comment.id}",
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
                 fontSize = 20.sp,
             )
+            Text(
+                text = "type ${comment.type}",
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                fontSize = 20.sp,
+            )
+            Divider(color = Color.Black)
         }
     }
 }
