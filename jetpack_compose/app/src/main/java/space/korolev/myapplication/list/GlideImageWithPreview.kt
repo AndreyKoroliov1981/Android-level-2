@@ -7,7 +7,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import com.google.accompanist.glide.GlideImage
+import coil.compose.rememberImagePainter
+
 import space.korolev.myapplication.R
 
 
@@ -27,8 +28,8 @@ fun GlideImageWithPreview(
             contentScale = contentScale
         )
     else
-        GlideImage(
-            data = data,
+        Image(painter= rememberImagePainter(
+            data = data),
             contentDescription = contentDescription,
             modifier = modifier ?: Modifier,
             contentScale = contentScale
