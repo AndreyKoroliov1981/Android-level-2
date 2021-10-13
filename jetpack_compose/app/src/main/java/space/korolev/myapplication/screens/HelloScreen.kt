@@ -1,7 +1,5 @@
 package space.korolev.myapplication.screens
 
-
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -12,7 +10,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 
 import androidx.compose.ui.unit.dp
@@ -22,7 +19,6 @@ import space.korolev.myapplication.R
 
 @Composable
 fun HelloScreen(navController: NavController) {
-    val context = LocalContext.current
     Column() {
         Surface(color = Color.Yellow) {
             Text(
@@ -35,9 +31,6 @@ fun HelloScreen(navController: NavController) {
             modifier = Modifier
                 .fillMaxSize()
                 .clickable(onClick = {
-                    /*Toast
-                        .makeText(context, "Pressed Image", Toast.LENGTH_SHORT)
-                        .show()*/
                     navController.navigate("listCharacters")
                 }
                 ))

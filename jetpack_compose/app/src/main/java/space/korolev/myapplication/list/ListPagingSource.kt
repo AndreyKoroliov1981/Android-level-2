@@ -1,16 +1,17 @@
 package space.korolev.myapplication.list
 
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
+
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import space.korolev.myapplication.CharacterRickAndMorty
+
 
 class ListPagingSource(
-    private val viewModel: ListViewModel
-) : PagingSource<Int, Comment>() {
-    override fun getRefreshKey(state: PagingState<Int, Comment>): Int? = null
+    private val viewModel: CharacterDataSource
+) : PagingSource<Int, CharacterRickAndMorty>() {
+    override fun getRefreshKey(state: PagingState<Int, CharacterRickAndMorty>): Int? = null
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Comment> =
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, CharacterRickAndMorty> =
         kotlin.runCatching {
             viewModel.load(params.key?:0) }.fold(
             onSuccess = { list ->
@@ -22,10 +23,4 @@ class ListPagingSource(
             },
             onFailure = {throwable->LoadResult.Error(throwable)}
             )
-    companion object{
-        fun pager(viewModel: ListViewModel)=Pager(
-            config = PagingConfig(pageSize = 20),
-            pagingSourceFactory = {ListPagingSource(viewModel)},
-        )
-        }
 }

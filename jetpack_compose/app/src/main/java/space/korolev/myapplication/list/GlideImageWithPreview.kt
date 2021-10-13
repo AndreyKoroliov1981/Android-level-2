@@ -1,13 +1,15 @@
 package space.korolev.myapplication.list
 
+
 import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.layout.ContentScale
-import space.korolev.myapplication.R
-import com.google.accompanist.glide.GlideImage
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import com.google.accompanist.glide.GlideImage
+import space.korolev.myapplication.R
+
 
 @Composable
 fun GlideImageWithPreview(
@@ -18,7 +20,7 @@ fun GlideImageWithPreview(
 ) {
     if (data == null)
         Image(
-            painter = painterResource(id = R.drawable.ic_launcher_foreground),
+            painter = painterResource(id = R.drawable.first_image),
             contentDescription = contentDescription,
             modifier = modifier ?: Modifier,
             alignment = Alignment.Center,

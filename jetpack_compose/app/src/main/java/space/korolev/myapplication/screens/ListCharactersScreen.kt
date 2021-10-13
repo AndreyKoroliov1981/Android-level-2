@@ -1,8 +1,5 @@
 package space.korolev.myapplication.screens
 
-import android.widget.ListView
-import android.widget.Toast
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Button
@@ -12,59 +9,43 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
-import androidx.paging.LoadState
-import androidx.paging.PagingData
+import androidx.paging.*
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import kotlinx.coroutines.flow.Flow
-import space.korolev.myapplication.api.Character
-import space.korolev.myapplication.list.Comment
+import space.korolev.myapplication.CharacterRickAndMorty
+import space.korolev.myapplication.list.CharacterDataSource
 import space.korolev.myapplication.list.GlideImageWithPreview
 import space.korolev.myapplication.list.ListPagingSource
-import space.korolev.myapplication.list.ListViewModel
 
+class MainViewModel(
+    dataRepository: CharacterDataSource
+) : ViewModel() {
 
-val pageData by lazy {ListPagingSource.pager(viewModel = ListViewModel()).flow} // видимо здесь не работает
+   val pageData: Flow<PagingData<CharacterRickAndMorty>> = Pager(PagingConfig(pageSize = 10)) {
+        ListPagingSource(dataRepository)
+    }.flow
+}
 
 @Composable
 fun ListCharactersScreen(navController: NavController) {
 
-    /*val viewModel by viewModels<ListViewModel> {
-        object :ViewModelProvider.Factory {
-            override fun <T :ViewModel?> create(modelClass: Class<T>):T=ListViewModel() as T
-        }
-    }*/
-
-    //val context = LocalContext.current
     Scaffold {
-        /*Text("List Characters Screen",
-            modifier = Modifier
-                .padding(24.dp)
-                .clickable(onClick = {
-                    Toast
-                        .makeText(context, "Pressed TEXT", Toast.LENGTH_SHORT)
-                        .show()
-                    navController.navigate("hello")
-                }
-                )
-        )*/
         ListView()
-
     }
 }
 
 @Composable
 fun ListView() {
-    val items: LazyPagingItems<Comment> = pageData.collectAsLazyPagingItems()
+    val items: LazyPagingItems<CharacterRickAndMorty> = MainViewModel(CharacterDataSource()).pageData.collectAsLazyPagingItems()
+
 
     LazyColumn {
         items(items) {
@@ -118,25 +99,26 @@ fun ListView() {
 }
 
 @Composable
-fun CommentView(comment: Comment) {
+fun CommentView(comment: CharacterRickAndMorty) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.padding(6.dp)
     )
     {
-        GlideImageWithPreview(data = comment.image, Modifier.size(60.dp))
+        GlideImageWithPreview(data = comment.image, Modifier.size(120.dp))
+
         Column(modifier = Modifier.padding(start = 6.dp)) {
             Text(
                 text = comment.name,
                 maxLines = 1,
                 fontWeight = FontWeight.Bold,
-                fontSize = 15.sp,
+                fontSize = 25.sp,
             )
             Text(
-                text = comment.text,
+                text = comment.status,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
-                fontSize = 12.sp,
+                fontSize = 20.sp,
             )
         }
     }
