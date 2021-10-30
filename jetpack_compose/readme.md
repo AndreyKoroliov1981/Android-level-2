@@ -7,7 +7,7 @@ You have to copy the files to your computer and open with Android Studio and run
 # Usage
 When you launch the application, a welcome screen appears with a description of the application's function. After clicking on the picture, a screen with two tabs is implemented, where characters and locations from the series are shown.
 
-![This is an image](/screenshots/begin.png)
+![This is an image](/screenshots/helloScreen.png)
 
 ![This is an image2](/screenshots/characters.png)
 
